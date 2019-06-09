@@ -30,7 +30,7 @@ namespace Sumulacja
         string docPath;
         private int boundaryCondition;
         private int neighbourhoodType;
-        Cell pierdolonaKumurkaZero;
+        Cell fakeZeroCell;
 
         public Grid()
         {
@@ -58,7 +58,7 @@ namespace Sumulacja
             File.WriteAllText(docPath, String.Empty);
             this.boundaryCondition = boundaryCondition;
             this.neighbourhoodType = neighbourhoodTypes;
-            pierdolonaKumurkaZero = new Cell();
+            fakeZeroCell = new Cell();
             dislocationDensity = 0.0;
 
 
@@ -240,75 +240,75 @@ namespace Sumulacja
             //winkle
             if (j == 0 && i == 0)
             {
-                neighbourhood[0] = pierdolonaKumurkaZero;
-                neighbourhood[1] = pierdolonaKumurkaZero;
-                neighbourhood[2] = pierdolonaKumurkaZero;
-                neighbourhood[3] = pierdolonaKumurkaZero;
+                neighbourhood[0] = fakeZeroCell;
+                neighbourhood[1] = fakeZeroCell;
+                neighbourhood[2] = fakeZeroCell;
+                neighbourhood[3] = fakeZeroCell;
                 neighbourhood[4] = previousIteration[0, 1];
 
-                neighbourhood[5] = pierdolonaKumurkaZero;
+                neighbourhood[5] = fakeZeroCell;
                 neighbourhood[6] = previousIteration[1, 0];
                 neighbourhood[7] = previousIteration[1, 1];
             }
             else if (j == Map_width - 1 && i == 0)
             {
-                neighbourhood[0] = pierdolonaKumurkaZero;
-                neighbourhood[1] = pierdolonaKumurkaZero;
-                neighbourhood[2] = pierdolonaKumurkaZero;
+                neighbourhood[0] = fakeZeroCell;
+                neighbourhood[1] = fakeZeroCell;
+                neighbourhood[2] = fakeZeroCell;
 
                 neighbourhood[3] = previousIteration[0, Map_width - 2];
-                neighbourhood[4] = pierdolonaKumurkaZero;
+                neighbourhood[4] = fakeZeroCell;
 
                 neighbourhood[5] = previousIteration[1, Map_width - 2];
                 neighbourhood[6] = previousIteration[1, Map_width - 1];
-                neighbourhood[7] = pierdolonaKumurkaZero;
+                neighbourhood[7] = fakeZeroCell;
             }
             else if (j == 0 && i == Map_height - 1)
             {
-                neighbourhood[0] = pierdolonaKumurkaZero;
+                neighbourhood[0] = fakeZeroCell;
                 neighbourhood[1] = previousIteration[Map_height - 2, 0];
                 neighbourhood[2] = previousIteration[Map_height - 2, 1];
 
-                neighbourhood[3] = pierdolonaKumurkaZero;
+                neighbourhood[3] = fakeZeroCell;
                 neighbourhood[4] = previousIteration[Map_height - 1, 1];
 
-                neighbourhood[5] = pierdolonaKumurkaZero;
-                neighbourhood[6] = pierdolonaKumurkaZero;
-                neighbourhood[7] = pierdolonaKumurkaZero;
+                neighbourhood[5] = fakeZeroCell;
+                neighbourhood[6] = fakeZeroCell;
+                neighbourhood[7] = fakeZeroCell;
             }
             else if (j == Map_width - 1 && i == Map_height - 1)
             {
                 neighbourhood[0] = previousIteration[Map_height - 2, Map_width - 2];
                 neighbourhood[1] = previousIteration[Map_height - 2, Map_width - 1];
-                neighbourhood[2] = pierdolonaKumurkaZero;
+                neighbourhood[2] = fakeZeroCell;
 
                 neighbourhood[3] = previousIteration[Map_height - 1, Map_width - 2];
-                neighbourhood[4] = pierdolonaKumurkaZero;
+                neighbourhood[4] = fakeZeroCell;
 
-                neighbourhood[5] = pierdolonaKumurkaZero;
-                neighbourhood[6] = pierdolonaKumurkaZero;
-                neighbourhood[7] = pierdolonaKumurkaZero;
+                neighbourhood[5] = fakeZeroCell;
+                neighbourhood[6] = fakeZeroCell;
+                neighbourhood[7] = fakeZeroCell;
             }
             //krawedzie lewa
             else if (j == 0 && i != 0 && i != (Map_height - 1))
             {
-                neighbourhood[0] = pierdolonaKumurkaZero;
+                neighbourhood[0] = fakeZeroCell;
                 neighbourhood[1] = previousIteration[i - 1, j];
                 neighbourhood[2] = previousIteration[i - 1, j + 1];
 
-                neighbourhood[3] = pierdolonaKumurkaZero;
+                neighbourhood[3] = fakeZeroCell;
                 neighbourhood[4] = previousIteration[i, j + 1];
 
-                neighbourhood[5] = pierdolonaKumurkaZero;
+                neighbourhood[5] = fakeZeroCell;
                 neighbourhood[6] = previousIteration[i + 1, j];
                 neighbourhood[7] = previousIteration[i + 1, j + 1];
             }
             // góna krawędź
             else if (j != 0 && i == 0 && j != (Map_width - 1))
             {
-                neighbourhood[0] = pierdolonaKumurkaZero;
-                neighbourhood[1] = pierdolonaKumurkaZero;
-                neighbourhood[2] = pierdolonaKumurkaZero;
+                neighbourhood[0] = fakeZeroCell;
+                neighbourhood[1] = fakeZeroCell;
+                neighbourhood[2] = fakeZeroCell;
 
                 neighbourhood[3] = previousIteration[i, j - 1];
                 neighbourhood[4] = previousIteration[i, j + 1];
@@ -322,14 +322,14 @@ namespace Sumulacja
             {
                 neighbourhood[0] = previousIteration[i - 1, j - 1];
                 neighbourhood[1] = previousIteration[i - 1, j];
-                neighbourhood[2] = pierdolonaKumurkaZero;
+                neighbourhood[2] = fakeZeroCell;
 
                 neighbourhood[3] = previousIteration[i, j - 1];
-                neighbourhood[4] = pierdolonaKumurkaZero;
+                neighbourhood[4] = fakeZeroCell;
 
                 neighbourhood[5] = previousIteration[i + 1, j - 1];
                 neighbourhood[6] = previousIteration[i + 1, j];
-                neighbourhood[7] = pierdolonaKumurkaZero;
+                neighbourhood[7] = fakeZeroCell;
             }
             // dolna krawędź
             else if (j != 0 && i == (Map_height - 1) && j != (Map_width - 1))
@@ -341,9 +341,9 @@ namespace Sumulacja
                 neighbourhood[3] = previousIteration[i, j - 1];
                 neighbourhood[4] = previousIteration[i, j + 1];
 
-                neighbourhood[5] = pierdolonaKumurkaZero;
-                neighbourhood[6] = pierdolonaKumurkaZero;
-                neighbourhood[7] = pierdolonaKumurkaZero;
+                neighbourhood[5] = fakeZeroCell;
+                neighbourhood[6] = fakeZeroCell;
+                neighbourhood[7] = fakeZeroCell;
             }
 
             //reszta
@@ -725,24 +725,24 @@ namespace Sumulacja
                     if (j == 0 && i == 0)
                     {
 
-                        neighbourhood[0] = pierdolonaKumurkaZero;
-                        neighbourhood[1] = pierdolonaKumurkaZero;
+                        neighbourhood[0] = fakeZeroCell;
+                        neighbourhood[1] = fakeZeroCell;
 
-                        neighbourhood[2] = pierdolonaKumurkaZero;
+                        neighbourhood[2] = fakeZeroCell;
                         neighbourhood[3] = previousIteration[0, 1];
 
-                        neighbourhood[4] = pierdolonaKumurkaZero;
+                        neighbourhood[4] = fakeZeroCell;
                         neighbourhood[5] = previousIteration[1, 0];
 
                     }
                     else if (j == Map_width - 1 && i == 0)
                     {
 
-                        neighbourhood[0] = pierdolonaKumurkaZero;
-                        neighbourhood[1] = pierdolonaKumurkaZero;
+                        neighbourhood[0] = fakeZeroCell;
+                        neighbourhood[1] = fakeZeroCell;
 
                         neighbourhood[2] = previousIteration[0, Map_width - 2];
-                        neighbourhood[3] = pierdolonaKumurkaZero;
+                        neighbourhood[3] = fakeZeroCell;
 
                         neighbourhood[4] = previousIteration[1, Map_width - 2];
                         neighbourhood[5] = previousIteration[1, Map_width - 1];
@@ -754,24 +754,24 @@ namespace Sumulacja
                         neighbourhood[0] = previousIteration[Map_height - 2, 0];
                         neighbourhood[1] = previousIteration[Map_height - 2, 1];
 
-                        neighbourhood[2] = pierdolonaKumurkaZero;
+                        neighbourhood[2] = fakeZeroCell;
                         neighbourhood[3] = previousIteration[Map_height - 1, 1];
 
-                        neighbourhood[4] = pierdolonaKumurkaZero;
-                        neighbourhood[5] = pierdolonaKumurkaZero;
+                        neighbourhood[4] = fakeZeroCell;
+                        neighbourhood[5] = fakeZeroCell;
 
                     }
                     else if (j == Map_width - 1 && i == Map_height - 1)
                     {
 
                         neighbourhood[0] = previousIteration[Map_height - 2, Map_width - 1];
-                        neighbourhood[1] = pierdolonaKumurkaZero;
+                        neighbourhood[1] = fakeZeroCell;
 
                         neighbourhood[2] = previousIteration[Map_height - 1, Map_width - 2];
-                        neighbourhood[3] = pierdolonaKumurkaZero;
+                        neighbourhood[3] = fakeZeroCell;
 
-                        neighbourhood[4] = pierdolonaKumurkaZero;
-                        neighbourhood[5] = pierdolonaKumurkaZero;
+                        neighbourhood[4] = fakeZeroCell;
+                        neighbourhood[5] = fakeZeroCell;
 
                     }
                     //edges
@@ -781,18 +781,18 @@ namespace Sumulacja
                         neighbourhood[0] = previousIteration[i - 1, j];
                         neighbourhood[1] = previousIteration[i - 1, j + 1];
 
-                        neighbourhood[2] = pierdolonaKumurkaZero;
+                        neighbourhood[2] = fakeZeroCell;
                         neighbourhood[3] = previousIteration[i, j + 1];
 
-                        neighbourhood[4] = pierdolonaKumurkaZero;
+                        neighbourhood[4] = fakeZeroCell;
                         neighbourhood[5] = previousIteration[i + 1, j];
 
                     }
                     else if (j != 0 && i == 0 && j != (Map_width - 1))
                     {
 
-                        neighbourhood[0] = pierdolonaKumurkaZero;
-                        neighbourhood[1] = pierdolonaKumurkaZero;
+                        neighbourhood[0] = fakeZeroCell;
+                        neighbourhood[1] = fakeZeroCell;
 
                         neighbourhood[2] = previousIteration[i, j - 1];
                         neighbourhood[3] = previousIteration[i, j + 1];
@@ -805,10 +805,10 @@ namespace Sumulacja
                     {
 
                         neighbourhood[0] = previousIteration[i - 1, j];
-                        neighbourhood[1] = pierdolonaKumurkaZero;
+                        neighbourhood[1] = fakeZeroCell;
 
                         neighbourhood[2] = previousIteration[i, j - 1];
-                        neighbourhood[3] = pierdolonaKumurkaZero;
+                        neighbourhood[3] = fakeZeroCell;
 
                         neighbourhood[4] = previousIteration[i + 1, j - 1];
                         neighbourhood[5] = previousIteration[i + 1, j];
@@ -823,8 +823,8 @@ namespace Sumulacja
                         neighbourhood[2] = previousIteration[i, j - 1];
                         neighbourhood[3] = previousIteration[i, j + 1];
 
-                        neighbourhood[4] = pierdolonaKumurkaZero;
-                        neighbourhood[5] = pierdolonaKumurkaZero;
+                        neighbourhood[4] = fakeZeroCell;
+                        neighbourhood[5] = fakeZeroCell;
 
                     }
 
@@ -845,10 +845,10 @@ namespace Sumulacja
                 case 1:
                     if (j == 0 && i == 0)
                     {
-                        neighbourhood[0] = pierdolonaKumurkaZero;
-                        neighbourhood[1] = pierdolonaKumurkaZero;
+                        neighbourhood[0] = fakeZeroCell;
+                        neighbourhood[1] = fakeZeroCell;
 
-                        neighbourhood[2] = pierdolonaKumurkaZero;
+                        neighbourhood[2] = fakeZeroCell;
                         neighbourhood[3] = previousIteration[0, 1];
 
                         neighbourhood[4] = previousIteration[1, 0];
@@ -856,25 +856,25 @@ namespace Sumulacja
                     }
                     else if (j == Map_width - 1 && i == 0)
                     {
-                        neighbourhood[0] = pierdolonaKumurkaZero;
-                        neighbourhood[1] = pierdolonaKumurkaZero;
+                        neighbourhood[0] = fakeZeroCell;
+                        neighbourhood[1] = fakeZeroCell;
 
                         neighbourhood[2] = previousIteration[0, Map_width - 2];
-                        neighbourhood[3] = pierdolonaKumurkaZero;
+                        neighbourhood[3] = fakeZeroCell;
 
                         neighbourhood[4] = previousIteration[1, Map_width - 1];
-                        neighbourhood[5] = pierdolonaKumurkaZero;
+                        neighbourhood[5] = fakeZeroCell;
                     }
                     else if (j == 0 && i == Map_height - 1)
                     {
-                        neighbourhood[0] = pierdolonaKumurkaZero;
+                        neighbourhood[0] = fakeZeroCell;
                         neighbourhood[1] = previousIteration[Map_height - 2, 0];
 
-                        neighbourhood[2] = pierdolonaKumurkaZero;
+                        neighbourhood[2] = fakeZeroCell;
                         neighbourhood[3] = previousIteration[Map_height - 1, 1];
 
-                        neighbourhood[4] = pierdolonaKumurkaZero;
-                        neighbourhood[5] = pierdolonaKumurkaZero;
+                        neighbourhood[4] = fakeZeroCell;
+                        neighbourhood[5] = fakeZeroCell;
                     }
                     else if (j == Map_width - 1 && i == Map_height - 1)
                     {
@@ -882,18 +882,18 @@ namespace Sumulacja
                         neighbourhood[1] = previousIteration[Map_height - 2, Map_width - 1];
 
                         neighbourhood[2] = previousIteration[Map_height - 1, Map_width - 2];
-                        neighbourhood[3] = pierdolonaKumurkaZero;
+                        neighbourhood[3] = fakeZeroCell;
 
-                        neighbourhood[4] = pierdolonaKumurkaZero;
-                        neighbourhood[5] = pierdolonaKumurkaZero;
+                        neighbourhood[4] = fakeZeroCell;
+                        neighbourhood[5] = fakeZeroCell;
                     }
 
                     else if (j == 0 && i != 0 && i != (Map_height - 1))
                     {
-                        neighbourhood[0] = pierdolonaKumurkaZero;
+                        neighbourhood[0] = fakeZeroCell;
                         neighbourhood[1] = previousIteration[i - 1, j];
 
-                        neighbourhood[2] = pierdolonaKumurkaZero;
+                        neighbourhood[2] = fakeZeroCell;
                         neighbourhood[3] = previousIteration[i, j + 1];
 
                         neighbourhood[4] = previousIteration[i + 1, j];
@@ -902,8 +902,8 @@ namespace Sumulacja
 
                     else if (j != 0 && i == 0 && j != (Map_width - 1))
                     {
-                        neighbourhood[0] = pierdolonaKumurkaZero;
-                        neighbourhood[1] = pierdolonaKumurkaZero;
+                        neighbourhood[0] = fakeZeroCell;
+                        neighbourhood[1] = fakeZeroCell;
 
                         neighbourhood[2] = previousIteration[i, j - 1];
                         neighbourhood[3] = previousIteration[i, j + 1];
@@ -918,10 +918,10 @@ namespace Sumulacja
                         neighbourhood[1] = previousIteration[i - 1, j];
 
                         neighbourhood[2] = previousIteration[i, j - 1];
-                        neighbourhood[3] = pierdolonaKumurkaZero;
+                        neighbourhood[3] = fakeZeroCell;
 
                         neighbourhood[4] = previousIteration[i + 1, j];
-                        neighbourhood[5] = pierdolonaKumurkaZero;
+                        neighbourhood[5] = fakeZeroCell;
                     }
 
 
@@ -933,8 +933,8 @@ namespace Sumulacja
                         neighbourhood[2] = previousIteration[i, j - 1];
                         neighbourhood[3] = previousIteration[i, j + 1];
 
-                        neighbourhood[4] = pierdolonaKumurkaZero;
-                        neighbourhood[5] = pierdolonaKumurkaZero;
+                        neighbourhood[4] = fakeZeroCell;
+                        neighbourhood[5] = fakeZeroCell;
                     }
 
                     else
@@ -1010,10 +1010,10 @@ namespace Sumulacja
 
             if (j == 0 && i == 0)
             {
-                neighbourhood[0] = pierdolonaKumurkaZero;
-                neighbourhood[1] = pierdolonaKumurkaZero;
+                neighbourhood[0] = fakeZeroCell;
+                neighbourhood[1] = fakeZeroCell;
 
-                neighbourhood[2] = pierdolonaKumurkaZero;
+                neighbourhood[2] = fakeZeroCell;
                 neighbourhood[3] = previousIteration[0, 1];
 
                 neighbourhood[4] = previousIteration[1, 0];
@@ -1021,25 +1021,25 @@ namespace Sumulacja
             }
             else if (j == Map_width - 1 && i == 0)
             {
-                neighbourhood[0] = pierdolonaKumurkaZero;
-                neighbourhood[1] = pierdolonaKumurkaZero;
+                neighbourhood[0] = fakeZeroCell;
+                neighbourhood[1] = fakeZeroCell;
 
                 neighbourhood[2] = previousIteration[0, Map_width - 2];
-                neighbourhood[3] = pierdolonaKumurkaZero;
+                neighbourhood[3] = fakeZeroCell;
 
                 neighbourhood[4] = previousIteration[1, Map_width - 1];
-                neighbourhood[5] = pierdolonaKumurkaZero;
+                neighbourhood[5] = fakeZeroCell;
             }
             else if (j == 0 && i == Map_height - 1)
             {
-                neighbourhood[0] = pierdolonaKumurkaZero;
+                neighbourhood[0] = fakeZeroCell;
                 neighbourhood[1] = previousIteration[Map_height - 2, 0];
 
-                neighbourhood[2] = pierdolonaKumurkaZero;
+                neighbourhood[2] = fakeZeroCell;
                 neighbourhood[3] = previousIteration[Map_height - 1, 1];
 
-                neighbourhood[4] = pierdolonaKumurkaZero;
-                neighbourhood[5] = pierdolonaKumurkaZero;
+                neighbourhood[4] = fakeZeroCell;
+                neighbourhood[5] = fakeZeroCell;
             }
             else if (j == Map_width - 1 && i == Map_height - 1)
             {
@@ -1047,18 +1047,18 @@ namespace Sumulacja
                 neighbourhood[1] = previousIteration[Map_height - 2, Map_width - 1];
 
                 neighbourhood[2] = previousIteration[Map_height - 1, Map_width - 2];
-                neighbourhood[3] = pierdolonaKumurkaZero;
+                neighbourhood[3] = fakeZeroCell;
 
-                neighbourhood[4] = pierdolonaKumurkaZero;
-                neighbourhood[5] = pierdolonaKumurkaZero;
+                neighbourhood[4] = fakeZeroCell;
+                neighbourhood[5] = fakeZeroCell;
             }
 
             else if (j == 0 && i != 0 && i != (Map_height - 1))
             {
-                neighbourhood[0] = pierdolonaKumurkaZero;
+                neighbourhood[0] = fakeZeroCell;
                 neighbourhood[1] = previousIteration[i - 1, j];
 
-                neighbourhood[2] = pierdolonaKumurkaZero;
+                neighbourhood[2] = fakeZeroCell;
                 neighbourhood[3] = previousIteration[i, j + 1];
 
                 neighbourhood[4] = previousIteration[i + 1, j];
@@ -1067,8 +1067,8 @@ namespace Sumulacja
 
             else if (j != 0 && i == 0 && j != (Map_width - 1))
             {
-                neighbourhood[0] = pierdolonaKumurkaZero;
-                neighbourhood[1] = pierdolonaKumurkaZero;
+                neighbourhood[0] = fakeZeroCell;
+                neighbourhood[1] = fakeZeroCell;
 
                 neighbourhood[2] = previousIteration[i, j - 1];
                 neighbourhood[3] = previousIteration[i, j + 1];
@@ -1083,10 +1083,10 @@ namespace Sumulacja
                 neighbourhood[1] = previousIteration[i - 1, j];
 
                 neighbourhood[2] = previousIteration[i, j - 1];
-                neighbourhood[3] = pierdolonaKumurkaZero;
+                neighbourhood[3] = fakeZeroCell;
 
                 neighbourhood[4] = previousIteration[i + 1, j];
-                neighbourhood[5] = pierdolonaKumurkaZero;
+                neighbourhood[5] = fakeZeroCell;
             }
 
             else if (j != 0 && i == (Map_height - 1) && j != (Map_width - 1))
@@ -1097,8 +1097,8 @@ namespace Sumulacja
                 neighbourhood[2] = previousIteration[i, j - 1];
                 neighbourhood[3] = previousIteration[i, j + 1];
 
-                neighbourhood[4] = pierdolonaKumurkaZero;
-                neighbourhood[5] = pierdolonaKumurkaZero;
+                neighbourhood[4] = fakeZeroCell;
+                neighbourhood[5] = fakeZeroCell;
             }
 
             else
@@ -1346,24 +1346,24 @@ namespace Sumulacja
             if (j == 0 && i == 0)
             {
 
-                neighbourhood[0] = pierdolonaKumurkaZero;
-                neighbourhood[1] = pierdolonaKumurkaZero;
+                neighbourhood[0] = fakeZeroCell;
+                neighbourhood[1] = fakeZeroCell;
 
-                neighbourhood[2] = pierdolonaKumurkaZero;
+                neighbourhood[2] = fakeZeroCell;
                 neighbourhood[3] = previousIteration[0, 1];
 
-                neighbourhood[4] = pierdolonaKumurkaZero;
+                neighbourhood[4] = fakeZeroCell;
                 neighbourhood[5] = previousIteration[1, 0];
 
             }
             else if (j == Map_width - 1 && i == 0)
             {
 
-                neighbourhood[0] = pierdolonaKumurkaZero;
-                neighbourhood[1] = pierdolonaKumurkaZero;
+                neighbourhood[0] = fakeZeroCell;
+                neighbourhood[1] = fakeZeroCell;
 
                 neighbourhood[2] = previousIteration[0, Map_width - 2];
-                neighbourhood[3] = pierdolonaKumurkaZero;
+                neighbourhood[3] = fakeZeroCell;
 
                 neighbourhood[4] = previousIteration[1, Map_width - 2];
                 neighbourhood[5] = previousIteration[1, Map_width - 1];
@@ -1375,24 +1375,24 @@ namespace Sumulacja
                 neighbourhood[0] = previousIteration[Map_height - 2, 0];
                 neighbourhood[1] = previousIteration[Map_height - 2, 1];
 
-                neighbourhood[2] = pierdolonaKumurkaZero;
+                neighbourhood[2] = fakeZeroCell;
                 neighbourhood[3] = previousIteration[Map_height - 1, 1];
 
-                neighbourhood[4] = pierdolonaKumurkaZero;
-                neighbourhood[5] = pierdolonaKumurkaZero;
+                neighbourhood[4] = fakeZeroCell;
+                neighbourhood[5] = fakeZeroCell;
 
             }
             else if (j == Map_width - 1 && i == Map_height - 1)
             {
 
                 neighbourhood[0] = previousIteration[Map_height - 2, Map_width - 1];
-                neighbourhood[1] = pierdolonaKumurkaZero;
+                neighbourhood[1] = fakeZeroCell;
 
                 neighbourhood[2] = previousIteration[Map_height - 1, Map_width - 2];
-                neighbourhood[3] = pierdolonaKumurkaZero;
+                neighbourhood[3] = fakeZeroCell;
 
-                neighbourhood[4] = pierdolonaKumurkaZero;
-                neighbourhood[5] = pierdolonaKumurkaZero;
+                neighbourhood[4] = fakeZeroCell;
+                neighbourhood[5] = fakeZeroCell;
 
             }
             //edges
@@ -1402,18 +1402,18 @@ namespace Sumulacja
                 neighbourhood[0] = previousIteration[i - 1, j];
                 neighbourhood[1] = previousIteration[i - 1, j + 1];
 
-                neighbourhood[2] = pierdolonaKumurkaZero;
+                neighbourhood[2] = fakeZeroCell;
                 neighbourhood[3] = previousIteration[i, j + 1];
 
-                neighbourhood[4] = pierdolonaKumurkaZero;
+                neighbourhood[4] = fakeZeroCell;
                 neighbourhood[5] = previousIteration[i + 1, j];
 
             }
             else if (j != 0 && i == 0 && j != (Map_width - 1))
             {
 
-                neighbourhood[0] = pierdolonaKumurkaZero;
-                neighbourhood[1] = pierdolonaKumurkaZero;
+                neighbourhood[0] = fakeZeroCell;
+                neighbourhood[1] = fakeZeroCell;
 
                 neighbourhood[2] = previousIteration[i, j - 1];
                 neighbourhood[3] = previousIteration[i, j + 1];
@@ -1426,10 +1426,10 @@ namespace Sumulacja
             {
 
                 neighbourhood[0] = previousIteration[i - 1, j];
-                neighbourhood[1] = pierdolonaKumurkaZero;
+                neighbourhood[1] = fakeZeroCell;
 
                 neighbourhood[2] = previousIteration[i, j - 1];
-                neighbourhood[3] = pierdolonaKumurkaZero;
+                neighbourhood[3] = fakeZeroCell;
 
                 neighbourhood[4] = previousIteration[i + 1, j - 1];
                 neighbourhood[5] = previousIteration[i + 1, j];
@@ -1444,8 +1444,8 @@ namespace Sumulacja
                 neighbourhood[2] = previousIteration[i, j - 1];
                 neighbourhood[3] = previousIteration[i, j + 1];
 
-                neighbourhood[4] = pierdolonaKumurkaZero;
-                neighbourhood[5] = pierdolonaKumurkaZero;
+                neighbourhood[4] = fakeZeroCell;
+                neighbourhood[5] = fakeZeroCell;
 
             }
 
@@ -1693,46 +1693,46 @@ namespace Sumulacja
             //winkle
             if (j == 0 && i == 0)
             {
-                neighbourhood[0] = pierdolonaKumurkaZero;
-                neighbourhood[1] = pierdolonaKumurkaZero;
+                neighbourhood[0] = fakeZeroCell;
+                neighbourhood[1] = fakeZeroCell;
                 neighbourhood[2] = previousIteration[0, 1];
                 neighbourhood[3] = previousIteration[1, 0];
             }
             else if (j == Map_width - 1 && i == 0)
             {
 
-                neighbourhood[0] = pierdolonaKumurkaZero;
+                neighbourhood[0] = fakeZeroCell;
                 neighbourhood[1] = previousIteration[0, Map_width - 2];
-                neighbourhood[2] = pierdolonaKumurkaZero;
+                neighbourhood[2] = fakeZeroCell;
                 neighbourhood[3] = previousIteration[1, Map_width - 1];
             }
             else if (j == 0 && i == Map_height - 1)
             {
                 neighbourhood[0] = previousIteration[Map_height - 2, 0];
-                neighbourhood[1] = pierdolonaKumurkaZero;
+                neighbourhood[1] = fakeZeroCell;
                 neighbourhood[2] = previousIteration[Map_height - 1, 1];
-                neighbourhood[3] = pierdolonaKumurkaZero;
+                neighbourhood[3] = fakeZeroCell;
             }
 
             else if (j == Map_width - 1 && i == Map_height - 1)
             {
                 neighbourhood[0] = previousIteration[Map_height - 2, Map_width - 1];
                 neighbourhood[1] = previousIteration[Map_height - 1, Map_width - 2];
-                neighbourhood[2] = pierdolonaKumurkaZero;
-                neighbourhood[3] = pierdolonaKumurkaZero;
+                neighbourhood[2] = fakeZeroCell;
+                neighbourhood[3] = fakeZeroCell;
             }
             //krawedzie lewa
             else if (j == 0 && i != 0 && i != (Map_height - 1))
             {
                 neighbourhood[0] = previousIteration[i - 1, j];
-                neighbourhood[1] = pierdolonaKumurkaZero;
+                neighbourhood[1] = fakeZeroCell;
                 neighbourhood[2] = previousIteration[i, j + 1];
                 neighbourhood[3] = previousIteration[i + 1, j];
             }
 
             else if (j != 0 && i == 0 && j != (Map_width - 1))
             {
-                neighbourhood[0] = pierdolonaKumurkaZero;
+                neighbourhood[0] = fakeZeroCell;
                 neighbourhood[1] = previousIteration[i, j - 1];
                 neighbourhood[2] = previousIteration[i, j + 1];
                 neighbourhood[3] = previousIteration[i + 1, j];
@@ -1742,7 +1742,7 @@ namespace Sumulacja
             {
                 neighbourhood[0] = previousIteration[i - 1, j];
                 neighbourhood[1] = previousIteration[i, j - 1];
-                neighbourhood[2] = pierdolonaKumurkaZero;
+                neighbourhood[2] = fakeZeroCell;
                 neighbourhood[3] = previousIteration[i + 1, j];
             }
 
@@ -1751,7 +1751,7 @@ namespace Sumulacja
                 neighbourhood[0] = previousIteration[i - 1, j];
                 neighbourhood[1] = previousIteration[i, j - 1];
                 neighbourhood[2] = previousIteration[i, j + 1];
-                neighbourhood[3] = pierdolonaKumurkaZero;
+                neighbourhood[3] = fakeZeroCell;
             }
 
             //reszta
@@ -2409,17 +2409,17 @@ namespace Sumulacja
                         //winkle
                         if (j == 0 && i == 0)
                         {
-                            neighbourhood[0] = pierdolonaKumurkaZero;
-                            neighbourhood[1] = pierdolonaKumurkaZero;
-                            neighbourhood[2] = pierdolonaKumurkaZero;
-                            neighbourhood[3] = pierdolonaKumurkaZero;
+                            neighbourhood[0] = fakeZeroCell;
+                            neighbourhood[1] = fakeZeroCell;
+                            neighbourhood[2] = fakeZeroCell;
+                            neighbourhood[3] = fakeZeroCell;
                             neighbourhood[4] = previousIteration[1, 0];
 
                         }
                         else if (j == Map_width - 1 && i == 0)
                         {
-                            neighbourhood[0] = pierdolonaKumurkaZero;
-                            neighbourhood[1] = pierdolonaKumurkaZero;
+                            neighbourhood[0] = fakeZeroCell;
+                            neighbourhood[1] = fakeZeroCell;
                             neighbourhood[2] = previousIteration[0, Map_width - 2];
                             neighbourhood[3] = previousIteration[1, Map_width - 2];
                             neighbourhood[4] = previousIteration[1, Map_width - 1];
@@ -2427,11 +2427,11 @@ namespace Sumulacja
                         }
                         else if (j == 0 && i == Map_height - 1)
                         {
-                            neighbourhood[0] = pierdolonaKumurkaZero;
+                            neighbourhood[0] = fakeZeroCell;
                             neighbourhood[1] = previousIteration[Map_height - 2, 0];
-                            neighbourhood[2] = pierdolonaKumurkaZero;
-                            neighbourhood[3] = pierdolonaKumurkaZero;
-                            neighbourhood[4] = pierdolonaKumurkaZero;
+                            neighbourhood[2] = fakeZeroCell;
+                            neighbourhood[3] = fakeZeroCell;
+                            neighbourhood[4] = fakeZeroCell;
 
                         }
                         else if (j == Map_width - 1 && i == Map_height - 1)
@@ -2439,25 +2439,25 @@ namespace Sumulacja
                             neighbourhood[0] = previousIteration[Map_height - 2, Map_width - 2];
                             neighbourhood[1] = previousIteration[Map_height - 2, Map_width - 1];
                             neighbourhood[2] = previousIteration[Map_height - 1, Map_width - 2];
-                            neighbourhood[3] = pierdolonaKumurkaZero;
-                            neighbourhood[4] = pierdolonaKumurkaZero;
+                            neighbourhood[3] = fakeZeroCell;
+                            neighbourhood[4] = fakeZeroCell;
 
                         }
                         //krawedzie lewa
                         else if (j == 0 && i != 0 && i != (Map_height - 1))
                         {
-                            neighbourhood[0] = pierdolonaKumurkaZero;
+                            neighbourhood[0] = fakeZeroCell;
                             neighbourhood[1] = previousIteration[i - 1, j];
-                            neighbourhood[2] = pierdolonaKumurkaZero;
-                            neighbourhood[3] = pierdolonaKumurkaZero;
+                            neighbourhood[2] = fakeZeroCell;
+                            neighbourhood[3] = fakeZeroCell;
                             neighbourhood[4] = previousIteration[i + 1, j];
 
                         }
                         // góna krawędź
                         else if (j != 0 && i == 0 && j != (Map_width - 1))
                         {
-                            neighbourhood[0] = pierdolonaKumurkaZero;
-                            neighbourhood[1] = pierdolonaKumurkaZero;
+                            neighbourhood[0] = fakeZeroCell;
+                            neighbourhood[1] = fakeZeroCell;
                             neighbourhood[2] = previousIteration[i, j - 1];
                             neighbourhood[3] = previousIteration[i + 1, j - 1];
                             neighbourhood[4] = previousIteration[i + 1, j];
@@ -2479,8 +2479,8 @@ namespace Sumulacja
                             neighbourhood[0] = previousIteration[i - 1, j - 1];
                             neighbourhood[1] = previousIteration[i - 1, j];
                             neighbourhood[2] = previousIteration[i, j - 1];
-                            neighbourhood[3] = pierdolonaKumurkaZero;
-                            neighbourhood[4] = pierdolonaKumurkaZero;
+                            neighbourhood[3] = fakeZeroCell;
+                            neighbourhood[4] = fakeZeroCell;
 
                         }
 
@@ -2501,35 +2501,35 @@ namespace Sumulacja
                     { //winkle
                         if (j == 0 && i == 0)
                         {
-                            neighbourhood[0] = pierdolonaKumurkaZero;
-                            neighbourhood[1] = pierdolonaKumurkaZero;
+                            neighbourhood[0] = fakeZeroCell;
+                            neighbourhood[1] = fakeZeroCell;
                             neighbourhood[2] = previousIteration[0, 1];
                             neighbourhood[3] = previousIteration[1, 0];
                             neighbourhood[4] = previousIteration[1, 1];
                         }
                         else if (j == Map_width - 1 && i == 0)
                         {
-                            neighbourhood[0] = pierdolonaKumurkaZero;
-                            neighbourhood[1] = pierdolonaKumurkaZero;
-                            neighbourhood[2] = pierdolonaKumurkaZero;
+                            neighbourhood[0] = fakeZeroCell;
+                            neighbourhood[1] = fakeZeroCell;
+                            neighbourhood[2] = fakeZeroCell;
                             neighbourhood[3] = previousIteration[1, Map_width - 1];
-                            neighbourhood[4] = pierdolonaKumurkaZero;
+                            neighbourhood[4] = fakeZeroCell;
                         }
                         else if (j == 0 && i == Map_height - 1)
                         {
                             neighbourhood[0] = previousIteration[Map_height - 2, 0];
                             neighbourhood[1] = previousIteration[Map_height - 2, 1];
                             neighbourhood[2] = previousIteration[Map_height - 1, 1];
-                            neighbourhood[3] = pierdolonaKumurkaZero;
-                            neighbourhood[4] = pierdolonaKumurkaZero;
+                            neighbourhood[3] = fakeZeroCell;
+                            neighbourhood[4] = fakeZeroCell;
                         }
                         else if (j == Map_width - 1 && i == Map_height - 1)
                         {
                             neighbourhood[0] = previousIteration[Map_height - 2, Map_width - 1];
-                            neighbourhood[1] = pierdolonaKumurkaZero;
-                            neighbourhood[2] = pierdolonaKumurkaZero;
-                            neighbourhood[3] = pierdolonaKumurkaZero;
-                            neighbourhood[4] = pierdolonaKumurkaZero;
+                            neighbourhood[1] = fakeZeroCell;
+                            neighbourhood[2] = fakeZeroCell;
+                            neighbourhood[3] = fakeZeroCell;
+                            neighbourhood[4] = fakeZeroCell;
                         }
                         //krawedzie lewa
                         else if (j == 0 && i != 0 && i != (Map_height - 1))
@@ -2543,8 +2543,8 @@ namespace Sumulacja
                         // góna krawędź
                         else if (j != 0 && i == 0 && j != (Map_width - 1))
                         {
-                            neighbourhood[0] = pierdolonaKumurkaZero;
-                            neighbourhood[1] = pierdolonaKumurkaZero;
+                            neighbourhood[0] = fakeZeroCell;
+                            neighbourhood[1] = fakeZeroCell;
                             neighbourhood[2] = previousIteration[i, j + 1];
                             neighbourhood[3] = previousIteration[i + 1, j];
                             neighbourhood[4] = previousIteration[i + 1, j + 1];
@@ -2553,10 +2553,10 @@ namespace Sumulacja
                         else if (j == Map_width - 1 && i != 0 && i != (Map_height - 1))
                         {
                             neighbourhood[0] = previousIteration[i - 1, j];
-                            neighbourhood[1] = pierdolonaKumurkaZero;
-                            neighbourhood[2] = pierdolonaKumurkaZero;
+                            neighbourhood[1] = fakeZeroCell;
+                            neighbourhood[2] = fakeZeroCell;
                             neighbourhood[3] = previousIteration[i + 1, j];
-                            neighbourhood[4] = pierdolonaKumurkaZero;
+                            neighbourhood[4] = fakeZeroCell;
                         }
                         // dolna krawędź
                         else if (j != 0 && i == (Map_height - 1) && j != (Map_width - 1))
@@ -2564,8 +2564,8 @@ namespace Sumulacja
                             neighbourhood[0] = previousIteration[i - 1, j];
                             neighbourhood[1] = previousIteration[i - 1, j + 1];
                             neighbourhood[2] = previousIteration[i, j + 1];
-                            neighbourhood[3] = pierdolonaKumurkaZero;
-                            neighbourhood[4] = pierdolonaKumurkaZero;
+                            neighbourhood[3] = fakeZeroCell;
+                            neighbourhood[4] = fakeZeroCell;
                         }
 
                         //reszta
@@ -2584,42 +2584,42 @@ namespace Sumulacja
                     { //winkle
                         if (j == 0 && i == 0)
                         {
-                            neighbourhood[0] = pierdolonaKumurkaZero;
+                            neighbourhood[0] = fakeZeroCell;
                             neighbourhood[1] = previousIteration[0, 1];
-                            neighbourhood[2] = pierdolonaKumurkaZero;
+                            neighbourhood[2] = fakeZeroCell;
                             neighbourhood[3] = previousIteration[1, 0];
                             neighbourhood[4] = previousIteration[1, 1];
                         }
                         else if (j == Map_width - 1 && i == 0)
                         {
                             neighbourhood[0] = previousIteration[0, Map_width - 2];
-                            neighbourhood[1] = pierdolonaKumurkaZero;
+                            neighbourhood[1] = fakeZeroCell;
                             neighbourhood[2] = previousIteration[1, Map_width - 2];
                             neighbourhood[3] = previousIteration[1, Map_width - 1];
-                            neighbourhood[4] = pierdolonaKumurkaZero;
+                            neighbourhood[4] = fakeZeroCell;
                         }
                         else if (j == 0 && i == Map_height - 1)
                         {
-                            neighbourhood[0] = pierdolonaKumurkaZero;
+                            neighbourhood[0] = fakeZeroCell;
                             neighbourhood[1] = previousIteration[Map_height - 1, 1];
-                            neighbourhood[2] = pierdolonaKumurkaZero;
-                            neighbourhood[3] = pierdolonaKumurkaZero;
-                            neighbourhood[4] = pierdolonaKumurkaZero;
+                            neighbourhood[2] = fakeZeroCell;
+                            neighbourhood[3] = fakeZeroCell;
+                            neighbourhood[4] = fakeZeroCell;
                         }
                         else if (j == Map_width - 1 && i == Map_height - 1)
                         {
                             neighbourhood[0] = previousIteration[Map_height - 1, Map_width - 2];
-                            neighbourhood[1] = pierdolonaKumurkaZero;
-                            neighbourhood[2] = pierdolonaKumurkaZero;
-                            neighbourhood[3] = pierdolonaKumurkaZero;
-                            neighbourhood[4] = pierdolonaKumurkaZero;
+                            neighbourhood[1] = fakeZeroCell;
+                            neighbourhood[2] = fakeZeroCell;
+                            neighbourhood[3] = fakeZeroCell;
+                            neighbourhood[4] = fakeZeroCell;
                         }
                         //krawedzie lewa
                         else if (j == 0 && i != 0 && i != (Map_height - 1))
                         {
-                            neighbourhood[0] = pierdolonaKumurkaZero;
+                            neighbourhood[0] = fakeZeroCell;
                             neighbourhood[1] = previousIteration[i, j + 1];
-                            neighbourhood[2] = pierdolonaKumurkaZero;
+                            neighbourhood[2] = fakeZeroCell;
                             neighbourhood[3] = previousIteration[i + 1, j];
                             neighbourhood[4] = previousIteration[i + 1, j + 1];
                         }
@@ -2636,19 +2636,19 @@ namespace Sumulacja
                         else if (j == Map_width - 1 && i != 0 && i != (Map_height - 1))
                         {
                             neighbourhood[0] = previousIteration[i, j - 1];
-                            neighbourhood[1] = pierdolonaKumurkaZero;
+                            neighbourhood[1] = fakeZeroCell;
                             neighbourhood[2] = previousIteration[i + 1, j - 1];
                             neighbourhood[3] = previousIteration[i + 1, j];
-                            neighbourhood[4] = pierdolonaKumurkaZero;
+                            neighbourhood[4] = fakeZeroCell;
                         }
                         // dolna krawędź
                         else if (j != 0 && i == (Map_height - 1) && j != (Map_width - 1))
                         {
                             neighbourhood[0] = previousIteration[i, j - 1];
                             neighbourhood[1] = previousIteration[i, j + 1];
-                            neighbourhood[2] = pierdolonaKumurkaZero;
-                            neighbourhood[3] = pierdolonaKumurkaZero;
-                            neighbourhood[4] = pierdolonaKumurkaZero;
+                            neighbourhood[2] = fakeZeroCell;
+                            neighbourhood[3] = fakeZeroCell;
+                            neighbourhood[4] = fakeZeroCell;
                         }
 
                         //reszta
@@ -2667,52 +2667,52 @@ namespace Sumulacja
                     { //winkle
                         if (j == 0 && i == 0)
                         {
-                            neighbourhood[0] = pierdolonaKumurkaZero;
-                            neighbourhood[1] = pierdolonaKumurkaZero;
-                            neighbourhood[2] = pierdolonaKumurkaZero;
-                            neighbourhood[3] = pierdolonaKumurkaZero;
+                            neighbourhood[0] = fakeZeroCell;
+                            neighbourhood[1] = fakeZeroCell;
+                            neighbourhood[2] = fakeZeroCell;
+                            neighbourhood[3] = fakeZeroCell;
                             neighbourhood[4] = previousIteration[0, 1];
                         }
                         else if (j == Map_width - 1 && i == 0)
                         {
-                            neighbourhood[0] = pierdolonaKumurkaZero;
-                            neighbourhood[1] = pierdolonaKumurkaZero;
-                            neighbourhood[2] = pierdolonaKumurkaZero;
+                            neighbourhood[0] = fakeZeroCell;
+                            neighbourhood[1] = fakeZeroCell;
+                            neighbourhood[2] = fakeZeroCell;
                             neighbourhood[3] = previousIteration[0, Map_width - 2];
-                            neighbourhood[4] = pierdolonaKumurkaZero;
+                            neighbourhood[4] = fakeZeroCell;
                         }
                         else if (j == 0 && i == Map_height - 1)
                         {
-                            neighbourhood[0] = pierdolonaKumurkaZero;
+                            neighbourhood[0] = fakeZeroCell;
                             neighbourhood[1] = previousIteration[Map_height - 2, 0];
                             neighbourhood[2] = previousIteration[Map_height - 2, 1];
-                            neighbourhood[3] = pierdolonaKumurkaZero;
+                            neighbourhood[3] = fakeZeroCell;
                             neighbourhood[4] = previousIteration[Map_height - 1, 1];
                         }
                         else if (j == Map_width - 1 && i == Map_height - 1)
                         {
                             neighbourhood[0] = previousIteration[Map_height - 2, Map_width - 2];
                             neighbourhood[1] = previousIteration[Map_height - 2, Map_width - 1];
-                            neighbourhood[2] = pierdolonaKumurkaZero;
+                            neighbourhood[2] = fakeZeroCell;
                             neighbourhood[3] = previousIteration[Map_height - 1, Map_width - 2];
-                            neighbourhood[4] = pierdolonaKumurkaZero;
+                            neighbourhood[4] = fakeZeroCell;
 
                         }
                         //krawedzie lewa
                         else if (j == 0 && i != 0 && i != (Map_height - 1))
                         {
-                            neighbourhood[0] = pierdolonaKumurkaZero;
+                            neighbourhood[0] = fakeZeroCell;
                             neighbourhood[1] = previousIteration[i - 1, j];
                             neighbourhood[2] = previousIteration[i - 1, j + 1];
-                            neighbourhood[3] = pierdolonaKumurkaZero;
+                            neighbourhood[3] = fakeZeroCell;
                             neighbourhood[4] = previousIteration[i, j + 1];
                         }
                         // góna krawędź
                         else if (j != 0 && i == 0 && j != (Map_width - 1))
                         {
-                            neighbourhood[0] = pierdolonaKumurkaZero;
-                            neighbourhood[1] = pierdolonaKumurkaZero;
-                            neighbourhood[2] = pierdolonaKumurkaZero;
+                            neighbourhood[0] = fakeZeroCell;
+                            neighbourhood[1] = fakeZeroCell;
+                            neighbourhood[2] = fakeZeroCell;
                             neighbourhood[3] = previousIteration[i, j - 1];
                             neighbourhood[4] = previousIteration[i, j + 1];
                         }
@@ -2721,9 +2721,9 @@ namespace Sumulacja
                         {
                             neighbourhood[0] = previousIteration[i - 1, j - 1];
                             neighbourhood[1] = previousIteration[i - 1, j];
-                            neighbourhood[2] = pierdolonaKumurkaZero;
+                            neighbourhood[2] = fakeZeroCell;
                             neighbourhood[3] = previousIteration[i, j - 1];
-                            neighbourhood[4] = pierdolonaKumurkaZero;
+                            neighbourhood[4] = fakeZeroCell;
                         }
                         // dolna krawędź
                         else if (j != 0 && i == (Map_height - 1) && j != (Map_width - 1))
@@ -4141,7 +4141,7 @@ namespace Sumulacja
                 }
             }
 
-            roCritical = dislocationDensity / (Map_height * Map_width);
+            roCritical = 80208201.57;// dislocationDensity / (Map_height * Map_width);
 
             for (int i = 0; i < Map_height; i++)
             {
